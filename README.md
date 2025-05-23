@@ -108,6 +108,7 @@ Built with modern cloud-native technologies for:
 - **Cloudflare Pages** for fast, global content delivery
 
 ### **Backend Stack**
+- **Fast API** with **Python** for worker Service which does the analysis and risk assesment 
 - **Express.js** with **TypeScript** for robust API development
 - **Vercel Functions** for serverless, auto-scaling deployment
 - **Upstash Redis** for job queuing and caching
