@@ -5,7 +5,7 @@ function App() {
   return (
     <Router>
       
-<Toaster richColors  />
+    <Toaster richColors={true}  />
       <Routes>
         <Route path="/" element={<LandingPage/>}></Route>
       </Routes>

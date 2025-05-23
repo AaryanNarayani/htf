@@ -16,8 +16,10 @@ import {
   X,
   Dot,
   ArrowUpRight,
+  Loader2,
 } from "lucide-react";
 import emailjs from '@emailjs/browser';
+import { toast } from "sonner";
 
 interface FeatureCardProps {
   icon: React.ReactNode;
@@ -36,6 +38,7 @@ const LandingPage: React.FC = () => {
   const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
   const [isVisible, setIsVisible] = useState<boolean>(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false); 
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   useEffect(() => {
     setIsVisible(true);
@@ -54,15 +57,17 @@ const LandingPage: React.FC = () => {
   const handleSubmit = async (e : any ) => {
     e.preventDefault();
     
+
     const serviceId = import.meta.env?.VITE_SERVICE_ID;
     const templateId = import.meta.env?.VITE_TEMPLATE_ID;
     const publicKey = import.meta.env?.VITE_PUBLIC_KEY;
 
     if (!serviceId || !templateId || !publicKey) {
       console.error("Missing environment variables");
+      toast.error("Something went wrong. Please try again.");
       return;
     }
-    console.log(serviceId, templateId, publicKey);
+    setIsLoading(true);
     await emailjs
       .send(serviceId, templateId, {
         user_email: email,
@@ -73,9 +78,14 @@ const LandingPage: React.FC = () => {
         () => {
           setIsSubmitted(true);
           localStorage.setItem("email_sent", "true");
+          toast.success("Thanks for joining! We'll be in touch soon.");
+          setEmail("");
+          setIsLoading(false);
         },
         (error) => {
           console.error('FAILED...', error.text);
+          toast.error("Something went wrong. Please try again.");
+          setIsLoading(false);
         },
       );
   };
@@ -179,24 +189,24 @@ const LandingPage: React.FC = () => {
 
             <div className="hidden md:block">
               <div className="flex items-center space-x-8">
-                <a
-                  href="#features"
+                <button
+                  onClick={() => scrollToSection("features")}
                   className="text-gray-300 hover:text-cyan-400 transition-colors cursor-pointer"
                 >
                   Features
-                </a>
-                <a
-                  href="#how-it-works"
+                </button>
+                <button
+                  onClick={() => scrollToSection("how-it-works")}
                   className="text-gray-300 hover:text-cyan-400 transition-colors cursor-pointer"
                 >
                   How It Works
-                </a>
-                <a
-                  href="#waitlist"
+                </button>
+                <button
+                  onClick={() => scrollToSection("waitlist")}
                   className="text-gray-300 hover:text-cyan-400 transition-colors cursor-pointer"
                 >
                   Waitlist
-                </a>
+                </button>
               </div>
             </div>
 
@@ -214,24 +224,24 @@ const LandingPage: React.FC = () => {
         {mobileMenuOpen && (
           <div className="md:hidden bg-black/95 backdrop-blur-xl border-t border-gray-800/50">
             <div className="px-2 pt-2 pb-3 space-y-1">
-              <a
-                href="#features"
+              <button
+                onClick={() => scrollToSection("features")}
                 className="block px-3 py-2 text-gray-300 hover:text-cyan-400 transition-colors"
               >
                 Features
-              </a>
-              <a
-                href="#how-it-works"
+              </button>
+              <button
+                onClick={() => scrollToSection("how-it-works")}
                 className="block px-3 py-2 text-gray-300 hover:text-cyan-400 transition-colors"
               >
                 How It Works
-              </a>
-              <a
-                href="#waitlist"
+              </button>
+              <button
+                onClick={() => scrollToSection("waitlist")}
                 className="block px-3 py-2 text-gray-300 hover:text-cyan-400 transition-colors"
               >
                 Waitlist
-              </a>
+              </button>
             </div>
           </div>
         )}
@@ -239,8 +249,10 @@ const LandingPage: React.FC = () => {
 
       {/* Hero Section */}
       <section className="min-h-screen flex items-center">
-        <div className="flex items-center gap-2 px-3 py-1 rounded-md bg-gradient-to-r from-primary-foreground-orange to-primary-yellow text-black text-xs font-medium font-secondary shadow-lg backdrop-blur-md fixed top-20 left-4">
-          <span className="w-2 h-2 bg-orange-500 rounded-full animate-pulse shadow" />
+        <div className="flex items-center gap-2 px-3 py-3 rounded-full pr-4 bg-primary-foreground-orange text-black text-md font-medium font-secondary shadow-lg backdrop-blur-md absolute top-20 left-4 z-999">
+          <span className="w-5 h-5 bg-primary-yellow rounded-full animate-pulse flex justify-center items-center" >
+            <span className="bg-amber-600 w-2 h-2 rounded-full shadow" />
+          </span>
           <span>Under Development</span>
         </div>
         <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/10 via-transparent to-transparent"></div>
@@ -248,17 +260,21 @@ const LandingPage: React.FC = () => {
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 z-10">
           <div
-            className={`text-center transition-all duration-1000 ${
+            className={`text-center transition-all duration-1000 flex flex-col items-center ${
               isVisible
                 ? "opacity-100 translate-y-0"
                 : "opacity-0 translate-y-8"
             }`}
           >
-            <h1 className="text-5xl md:text-7xl lg:text-[150px] font-primary mb-6 tracking-[5px] text-white flex items-center justify-center relative">
+            <h1 className="text-5xl md:text-7xl lg:text-[150px] font-primary mb-6 tracking-[5px] text-white flex items-center justify-center relative w-fit md:w-full">
               Legit{" "}
               <Dot
                 size={300}
-                className="absolute right-0 -top-15 text-primary-blue"
+                className="absolute right-0 -top-15 text-primary-blue hidden lg:block"
+              />
+              <Dot
+                size={50}
+                className="absolute -right-9 -bottom-2 text-primary-blue block lg:hidden"
               />
               Ai
             </h1>
@@ -470,7 +486,7 @@ const LandingPage: React.FC = () => {
 
       <section className="relative  flex items-end w-full">
           {/* add data about achitecture */}
-        <div className="bg-gray-900/50 backdrop-blur-sm border border-gray-800 rounded-3xl p-8 md:p-12 w-full max-w-7xl mx-auto mb-16 flex justify-between items-center">
+        <div className="bg-gray-900/50 backdrop-blur-sm border border-gray-800 rounded-3xl p-8 md:p-12 w-full max-w-7xl mx-auto mb-16 md:flex justify-between flex-col items-center">
           <div>
             <h1 className="text-4xl md:text-5xl font-bold mb-6 gradient-text">System Architecture</h1>
           <p className="text-xl text-gray-400 max-w-xl ">
@@ -526,10 +542,15 @@ const LandingPage: React.FC = () => {
                   />
                   <button
                     type="submit"
+                    disabled={isLoading}
                     className="gradient-bg text-black px-8 py-4 rounded-xl font-semibold hover:shadow-lg hover:shadow-cyan-500/25 transition-all duration-300 hover:scale-105 inline-flex items-center justify-center gap-2 w-fit"
                   >
-                    <Mail size={18} />
+                    {
+                      isLoading ? <Loader2 className="animate-spin" size={18} /> : <>
+                        <Mail size={18} />
                     Join Waitlist
+                      </>
+                    }
                   </button>
                 </div>
               </form>
