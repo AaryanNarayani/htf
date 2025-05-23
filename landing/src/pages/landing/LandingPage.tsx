@@ -17,6 +17,7 @@ import {
   Dot,
   ArrowUpRight,
   Loader2,
+  Heart,
 } from "lucide-react";
 import emailjs from '@emailjs/browser';
 import { toast } from "sonner";
@@ -486,7 +487,7 @@ const LandingPage: React.FC = () => {
 
       <section className="relative  flex items-end w-full">
           {/* add data about achitecture */}
-        <div className="bg-gray-900/50 backdrop-blur-sm border border-gray-800 rounded-3xl p-8 md:p-12 w-full max-w-7xl mx-auto mb-16 md:flex justify-between flex-col items-center">
+        <div className="bg-gray-900/50 backdrop-blur-sm border border-gray-800 rounded-3xl p-8 md:p-12 w-full max-w-7xl mx-auto mb-16 md:flex lg:flex justify-between flex-col items-center">
           <div>
             <h1 className="text-4xl md:text-5xl font-bold mb-6 gradient-text">System Architecture</h1>
           <p className="text-xl text-gray-400 max-w-xl ">
@@ -514,7 +515,6 @@ const LandingPage: React.FC = () => {
         
       </section>
 
-      {/* Waitlist Section */}
       <section
         id="waitlist"
         className="py-20 bg-gradient-to-b from-transparent to-gray-900/50"
@@ -522,10 +522,10 @@ const LandingPage: React.FC = () => {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <div className="bg-gray-900/50 backdrop-blur-sm border border-gray-800 rounded-3xl p-8 md:p-12">
             <h2 className="text-3xl md:text-4xl font-bold mb-6 gradient-text">
-              ✉ Be the First to Know!
+              Be the First to Know!
             </h2>
             <p className="text-xl text-gray-400 mb-8">
-              Get early access updates — join our waitlist and be among the
+              Get early access updates join our waitlist and be among the
               first to experience the future of legal document analysis.
             </p>
 
@@ -543,7 +543,7 @@ const LandingPage: React.FC = () => {
                   <button
                     type="submit"
                     disabled={isLoading}
-                    className="gradient-bg text-black px-8 py-4 rounded-xl font-semibold hover:shadow-lg hover:shadow-cyan-500/25 transition-all duration-300 hover:scale-105 inline-flex items-center justify-center gap-2 w-fit"
+                    className="gradient-bg cursor-pointer text-black px-8 py-4 rounded-xl font-semibold hover:shadow-lg hover:shadow-cyan-500/25 transition-all duration-300 hover:scale-105 inline-flex items-center justify-center gap-2 w-fit"
                   >
                     {
                       isLoading ? <Loader2 className="animate-spin" size={18} /> : <>
@@ -577,22 +577,13 @@ const LandingPage: React.FC = () => {
               <span className="text-2xl font-bold text-cyan-400">LegitAi</span>
             </div>
             <div className="text-gray-400 text-center md:text-right">
-              <p>© 2025 LegitAi — All Rights Reserved.</p>
-              <div className="flex gap-4 justify-center md:justify-end mt-2">
-                <a
-                  href="mailto:contact@LegitAi.ai"
-                  className="text-cyan-400 hover:text-cyan-300 transition-colors"
-                >
-                  contact@LegitAi.ai
-                </a>
-                <span className="text-gray-600">|</span>
-                <a
-                  href="#"
-                  className="text-cyan-400 hover:text-cyan-300 transition-colors"
-                >
-                  Privacy Policy
-                </a>
+              <div className="text-gray-400 text-center md:text-right">
+              <div className="flex gap-2 justify-center md:justify-end mt-2 items-center">
+                <span className="text-sm">made with</span>
+                <Heart className="text-red-500 fill-current" size={16} />
+                <span className="text-sm">by codeSnorters</span>
               </div>
+            </div>
             </div>
           </div>
         </div>
