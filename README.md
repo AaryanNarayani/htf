@@ -1,4 +1,4 @@
-# ⚖️ **Legit.AI**
+# **Legit.AI**
 *Intelligently analyzing your legal documents with AI-powered precision*
 
 ---
