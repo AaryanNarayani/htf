@@ -127,7 +127,9 @@ Built with modern cloud-native technologies for:
 
 ## 🏗️ **System Architecture**
 
-*[Architecture diagram will be placed here]*
+<div align="center">
+  <img src="./assets/images/architecture.png" alt="System Architecture" width="800"/>
+</div>
 
 ### **Core Processing Pipeline**
 
