@@ -50,6 +50,14 @@ Built with modern cloud-native technologies for:
 
 ---
 
+## 🏗️ **System Architecture**
+
+<div align="center">
+  <img src="./assets/images/architecture.jpg" alt="System Architecture" width="500"/>
+</div>
+
+---
+
 ## ✨ **Key Features**
 
 ### 🔍 **Document Analysis**
@@ -125,12 +133,6 @@ Built with modern cloud-native technologies for:
 - **pgvector** for efficient similarity search
 
 ---
-
-## 🏗️ **System Architecture**
-
-<div align="center">
-  <img src="./assets/images/architecture.jpg" alt="System Architecture" width="500"/>
-</div>
 
 ### **Core Processing Pipeline**
 
